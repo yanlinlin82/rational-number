@@ -6,27 +6,23 @@ This library is for representing rational number precisely, in decimal or other 
 
 ## Quick Start
 
-This library is released as single C++ header: `rational.h`
+This library is released as single C++ header: [rational.h](rational.h)
 
-There are examples in `demo.cpp`, it can be built and run as:
+Here goes a very simple example:
 
-```sh
-$ make
-$ ./demo.out
+```cpp
+#include "rational.h"
+using namespace std;  // for 'rational'
+using namespace math; // for 'cout' & 'endl'
+
+int main()
+{
+    rational x(3, 5);
+    cout << x.to_fraction() << endl;   // in fraction format: 3/5
+    cout << x.to_decimal() << endl;    // in decimal format: 0.6
+    cout << x.to_decimal<2>() << endl; // in binary decimal format: 0.(1001)...
+    return 0;
+}
 ```
 
-It will prompt:
-
-```
-0      = 0
-1      = 1
-2 / 1  = 2
-1 / 2  = 0.5
-5 / 2  = 2.5
-2 / 5  = 0.4
-1 / 3  = 0.(3)...
-3 / 7  = 0.(428571)...
-22 / 7 = 3.(142857)...
-1 / 10 = 0.1
-1 / 10 = (binary) 0.0(0011)...
-```
+There are more examples in [demo.cpp](demo.cpp)
