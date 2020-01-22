@@ -39,10 +39,18 @@ void test_binary_decimal()
 	unit_assert(rational(1, 10).to_decimal<2>() == "0.0(0011)...");
 }
 
+void test_add()
+{
+	unit(add);
+	unit_assert(rational(1) + rational(2) == rational(3));
+	unit_assert(rational(1, 10) + rational(1, 5) == rational(3, 10));
+}
+
 int main()
 {
 	test_fraction();
 	test_decimal();
 	test_binary_decimal();
+	test_add();
 	return 0;
 }

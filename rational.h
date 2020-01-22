@@ -81,6 +81,18 @@ namespace math
 			return s;
 		}
 
+		rational operator + (const rational& r)
+		{
+			unsigned int p = p_ * r.q_ + q_ * r.p_;
+			unsigned int q = q_ * r.q_;
+			return rational(p, q);
+		}
+
+		bool operator == (const rational& r) const
+		{
+			return (p_ == r.p_) && (q_ == r.q_);
+		}
+
 		friend std::ostream& operator << (std::ostream& os, const rational& r)
 		{
 			return (os << r.to_decimal());
