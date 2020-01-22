@@ -46,11 +46,20 @@ void test_add()
 	unit_assert(rational(1, 10) + rational(1, 5) == rational(3, 10));
 }
 
+void test_negative()
+{
+	unit(negative);
+	unit_assert(rational(1, 3, true).to_fraction() == "-1/3");
+	unit_assert(rational(1, 3, true).to_decimal() == "-0.(3)...");
+	unit_assert(rational(0, 1, true).to_fraction() == "0");
+}
+
 int main()
 {
 	test_fraction();
 	test_decimal();
 	test_binary_decimal();
 	test_add();
+	test_negative();
 	return 0;
 }

@@ -7,12 +7,13 @@ namespace math
 	class rational
 	{
 	private:
+		bool negative_;
 		unsigned int p_, q_;
 
 	public:
-		explicit rational(unsigned int p = 0, unsigned int q = 1)
+		explicit rational(unsigned int p = 0, unsigned int q = 1, bool negative = false)
 		{
-			set(p, q);
+			set(p, q, negative);
 		}
 
 		std::string to_fraction() const
@@ -21,6 +22,9 @@ namespace math
 				return (p_ == 0 ? "NA" : "Inf");
 			}
 			std::string s = std::to_string(p_);
+			if (negative_) {
+				s = "-" + s;
+			}
 			if (q_ != 1) {
 				s += '/' + std::to_string(q_);
 			}
@@ -44,6 +48,9 @@ namespace math
 			}
 			if (s.empty()) {
 				s = "0";
+			}
+			if (negative_) {
+				s = "-" + s;
 			}
 			if (m > 0) {
 				s += '.';
@@ -99,18 +106,19 @@ namespace math
 		}
 
 	private:
-		void set(unsigned int p, unsigned int q)
+		void set(unsigned int p, unsigned int q, bool negative)
 		{
 			if (p == 0 && q == 0) {
-				p_ = p; q_ = q;
+				p_ = p; q_ = q; negative_ = false;
 			} else if (p == 0) {
-				p_ = 0; q_ = 1;
+				p_ = 0; q_ = 1; negative_ = false;
 			} else if (q == 0) {
-				p_ = 1; q_ = 0;
+				p_ = 1; q_ = 0; negative_ = negative;
 			} else {
 				unsigned int gcd = calculate_gcd(p, q);
 				p_ = p / gcd;
 				q_ = q / gcd;
+				negative_ = negative;
 			}
 		}
 
