@@ -10,11 +10,30 @@ namespace math
 		unsigned int p_, q_;
 
 	public:
-		explicit rational(unsigned int p = 0, unsigned int q = 1): p_(p), q_(q) { }
+		explicit rational(unsigned int p = 0, unsigned int q = 1)
+		{
+			set(p, q);
+		}
+
+		std::string to_fraction() const
+		{
+			if (q_ == 0) {
+				return (p_ == 0 ? "NA" : "Inf");
+			}
+			std::string s = std::to_string(p_);
+			if (q_ != 1) {
+				s += '/' + std::to_string(q_);
+			}
+			return s;
+		}
 
 		template <unsigned int base = 10>
-		std::string to_string() const {
+		std::string to_decimal() const
+		{
 			static_assert(base >= 2);
+			if (q_ == 0) {
+				return (p_ == 0 ? "NA" : "Inf");
+			}
 			unsigned int n = p_ / q_;
 			unsigned int m = p_ % q_;
 			std::string s;
@@ -62,8 +81,38 @@ namespace math
 			return s;
 		}
 
-		friend std::ostream& operator << (std::ostream& os, const rational& r) {
-			return (os << r.to_string());
+		friend std::ostream& operator << (std::ostream& os, const rational& r)
+		{
+			return (os << r.to_decimal());
+		}
+
+	private:
+		void set(unsigned int p, unsigned int q)
+		{
+			if (p == 0 && q == 0) {
+				p_ = p; q_ = q;
+			} else if (p == 0) {
+				p_ = 0; q_ = 1;
+			} else if (q == 0) {
+				p_ = 1; q_ = 0;
+			} else {
+				unsigned int gcd = calculate_gcd(p, q);
+				p_ = p / gcd;
+				q_ = q / gcd;
+			}
+		}
+
+		// GCD: greatest common divisor
+		static unsigned int calculate_gcd(unsigned int p, unsigned int q)
+		{
+			while (p && q) {
+				if (p > q) {
+					p %= q;
+				} else {
+					q %= p;
+				}
+			}
+			return (p + q);
 		}
 	};
 }

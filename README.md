@@ -4,13 +4,15 @@
 
 This library is for representing rational number precisely, in decimal or other positional system, such as binary form.
 
-## Example
+## Quick Start
 
-Run following shell commands:
+This library is released as single C++ header: `rational.h`
+
+There are examples in `demo.cpp`, it can be built and run as:
 
 ```sh
-$ g++ -Wall demo.cpp
-$ ./a.out
+$ make
+$ ./demo.out
 ```
 
 It will prompt:

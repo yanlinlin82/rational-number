@@ -1,4 +1,5 @@
 #include "rational.h"
+#include <iostream>
 using namespace std;
 using namespace math;
 
@@ -14,6 +15,6 @@ int main()
 	cout << "3 / 7  = " << rational(3, 7) << endl;
 	cout << "22 / 7 = " << rational(22, 7) << endl;
 	cout << "1 / 10 = " << rational(1, 10) << endl;
-	cout << "1 / 10 = (binary) " << rational(1, 10).to_string<2>() << endl;
+	cout << "1 / 10 = (binary) " << rational(1, 10).to_decimal<2>() << endl;
 	return 0;
 }
